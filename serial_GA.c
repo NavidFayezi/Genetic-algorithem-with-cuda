@@ -5,7 +5,7 @@
 #define CHROMOSOME_LENGHT 11
 #define POPULATION 500
 
-int fitness_function(char chromosome[]) {
+int fitness_function(char* chromosome) {
 
     int i = 0;
     int fitness = 0;
@@ -31,14 +31,37 @@ void init_population(char** a) {
     }
 }
 
+int comp(const void** elem1, const void** elem2)
+{
+    char** f = ((char**)elem1);
+    char** s = ((char**)elem2);
+    int temp = fitness_function(*s) - fitness_function(*f);
+    return temp;
+
+}
+
+int comp2(const void* elem1, const void* elem2) {
+    char f = *((char*)elem1);
+    char s = *((char*)elem2);
+    return f - s;
+}
+
 int main() {
     int i = 0;
     char** population = (char**)malloc(sizeof(char*) * POPULATION);
     init_population(population);
+
+   
+    qsort(population, POPULATION, sizeof(char*), comp);
+
     for (i = 0; i < POPULATION; i++) {
         printf(population[i]);
+        printf("\n %d", fitness_function(population[i]));
         printf("\n");
     }
+
+    
+    printf("%d", i);
     int myint = fitness_function((char*)"Hezmo world");
     printf("%c", (char)65);
 }
