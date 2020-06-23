@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define CHROMOSOME_LENGHT 11
-#define POPULATION 10
+#define POPULATION 10000
 
 int fitness_function(char* chromosome) {
 
@@ -66,6 +66,7 @@ void mutate(char* chromosome) {
         }
     }
 }
+
 int main() {
 
     char word[] = "Hello world";
@@ -92,15 +93,16 @@ int main() {
         }
 
         qsort(population, (POPULATION + (POPULATION / 2)), sizeof(char*), comp);
-        for (i = 0; i < POPULATION; i++) {
+       /* for (i = 0; i < POPULATION; i++) {
             printf(population[i]);
             printf("\n %d", fitness_function(population[i]));
             printf("\n");
-        }
+        }*/
 
     }
         
     printf(population[0]);
+    free(population);
 
 
 }
